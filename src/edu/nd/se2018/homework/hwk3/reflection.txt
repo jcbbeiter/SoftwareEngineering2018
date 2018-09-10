@@ -1,0 +1,9 @@
+I made Strategy an abstract base class, rather than an interface. The rationale
+behind this was because I wanted polymorphic behavior -- from the Horse's
+perspective, it just wants a Strategy that it can use, there's no need for the
+different strategies to be completely different classes. I also tried to keep
+the information passing minimal -- Strategy takes the distance traveled and
+returns the percent speed, rather than also taking in the max speed and returning
+the current speed. Similarly, the Horse keeps track of how far it has run and
+reports back to the Race, rather than the Race keeping track. This follows the
+OO design principle of encapsulation.
