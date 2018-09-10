@@ -21,6 +21,22 @@ public class Horse {
 	public String getName() { return this.name; }
 	public double getDistanceRun(){ return this.distanceRun; }
 	
+	public void setStrategy(int strategyNum) {
+		switch(strategyNum) {
+			case 1:
+				strategy = new SlowStartStrategy();
+				break;
+			case 2:
+				strategy = new SteadyRunStrategy();
+				break;
+			case 3:
+				strategy = new EarlySprintStrategy();
+				break;
+			default:
+				System.out.println("Error: Unknown strategy number");
+		}
+	}
+	
 	// racing functions
 	public void reset() {
 		this.distanceRun = 0;
