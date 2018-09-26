@@ -64,9 +64,11 @@ public class Road {
 	}
 	
 	public void addCarToMiddle(Car newCar) {
+		// pull all cars into temp
 		ArrayList<Car> temp = new ArrayList<Car>();
 		cars.drainTo(temp);
 		
+		// put cars from temp back into the queue, inserting newCar in its sorted position
 		for (Car c : temp) {
 			if (newCar != null && newCar.getVehicleY() > c.getVehicleY()) {
 				cars.add(newCar);
