@@ -21,7 +21,9 @@ public class GateClosed implements IGateState {
 
 	@Override
 	public void leaveStation() {
-		gate.setGateState(gate.getGateOpeningState());		
+		if (gate.stationClear()) {
+			gate.setGateState(gate.getGateOpeningState());	
+		}
 	}
 
 	@Override

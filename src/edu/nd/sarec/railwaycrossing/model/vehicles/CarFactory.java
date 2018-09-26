@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
+import edu.nd.sarec.railwaycrossing.model.infrastructure.Road;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.gate.CrossingGate;
 
 
@@ -20,20 +21,26 @@ public class CarFactory {
 	private ArrayList<Car> cars = new ArrayList<Car>();
 	Direction direction;
 	Point location;
+	private Road road;
+	private Road crossingRoad;
+	private Road endRoad;
 	
 	public CarFactory(){}
 	
-	public CarFactory(Direction direction, Point location, Collection<CrossingGate> gates){
+	public CarFactory(Direction direction, Point location, Collection<CrossingGate> gates, Road road, Road crossingRoad, Road endRoad){
 		this.direction = direction;
 		this.location = location;
 		this.gates = gates;
+		this.road = road;
+		this.crossingRoad = crossingRoad;
+		this.endRoad = endRoad;
 	}
 	
 	
 	// Most code here is to create random speeds
 	public Car buildCar(){
 		if (previousCar == null || location.y < previousCar.getVehicleY()-100){
-			Car car = new Car(location.x,location.y);	
+			Car car = new Car(location.x,location.y,road,crossingRoad,endRoad);	
 			double speedVariable = (Math.random() * 10)/10;
 			car.setSpeed((2-speedVariable)*1.5); 
 			
@@ -41,15 +48,12 @@ public class CarFactory {
 			for(CrossingGate gate: gates){
 				gate.addObserver(car);
 				if(gate != null && gate.getTrafficCommand()=="STOP")
-					car.setGateDownFlag(false);
+					car.setGateDownFlag(true);
 			}
 			
-			// Each car must observe the car infront of it so it doesn't collide with it.
-			if (previousCar != null)
-				previousCar.addObserver(car);
-			previousCar = car;
-			
 			cars.add(car);
+			road.addCar(car);
+			previousCar = car;
 			return car;
 		} else 
 			return null;

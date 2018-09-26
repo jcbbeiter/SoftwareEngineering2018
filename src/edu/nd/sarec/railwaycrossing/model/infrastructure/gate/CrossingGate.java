@@ -3,6 +3,7 @@ package edu.nd.sarec.railwaycrossing.model.infrastructure.gate;
 import java.util.Observable;
 import java.util.Observer;
 
+import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
 import edu.nd.sarec.railwaycrossing.model.vehicles.Train;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -20,8 +21,9 @@ public class CrossingGate extends Observable implements Observer{
 	private int anchorY;
 	private int movingX;
 	private int movingY;
-	private int triggerPoint;
-	private int exitPoint;
+	private int eastBound;
+	private int westBound;
+	private int trainsInStation;
 
 	private IGateState gateClosed;
 	private IGateState gateOpen;
@@ -40,8 +42,8 @@ public class CrossingGate extends Observable implements Observer{
 		anchorY = yPosition;
 		movingX = anchorX;
 		movingY = anchorY-60;
-		triggerPoint = anchorX+250;
-		exitPoint = anchorX-250;
+		eastBound = anchorX+250;
+		westBound = anchorX-250;
 		
 		// Gate elements
 		line = new Line(anchorX, anchorY,movingX,movingY);
@@ -55,6 +57,7 @@ public class CrossingGate extends Observable implements Observer{
 		gateClosing = new GateClosing(this);
 		currentGateState = gateOpen;
 		gateName = crossingGate;
+		trainsInStation = 0;
 	}
 	
 	public Line getGateLine(){
@@ -74,7 +77,7 @@ public class CrossingGate extends Observable implements Observer{
 			line.setEndX(movingX);
 			line.setEndY(movingY);
 		} else {
-			currentGateState.gateFinishedOpening();
+			currentGateState.gateFinishedClosing();
 		}
 	}
 	
@@ -115,15 +118,30 @@ public class CrossingGate extends Observable implements Observer{
 		return currentGateState.getTrafficAction();
 	}
 	
+	public boolean stationClear() {
+		return (this.trainsInStation == 0);
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Train){
 			Train train = (Train)o;
-			if (train.getVehicleX() < exitPoint)
-				currentGateState.leaveStation();
-			else if(train.getVehicleX() < triggerPoint){
-				currentGateState.approachStation();
-			} 
+			if ((train.getVehicleX() < westBound && train.getDirection() == Direction.WEST) ||
+					(train.getVehicleX() > eastBound && train.getDirection() == Direction.EAST)) {
+				if (train.inStation(gateName)) {
+					trainsInStation--;
+					train.setNotInStation(gateName);
+					currentGateState.leaveStation();
+				}
+			}
+			else if((train.getVehicleX() < eastBound && train.getDirection() == Direction.WEST) || 
+					(train.getVehicleX() > westBound && train.getDirection() == Direction.EAST)){
+				if (train.inStation(gateName) == false) {
+					trainsInStation++;
+					train.setInStation(gateName);
+					currentGateState.approachStation();
+				}
+			}
 		}	
 	}
 }

@@ -22,7 +22,9 @@ public class GateClosing implements IGateState{
 	public void leaveStation() {
 		// This was an unwanted event.  The gate wasn't fully closed when the train was in the station.
 		// Nevertheless we will open the gate.
-		gate.setGateState(gate.getGateOpeningState());	
+		if (gate.stationClear()) {
+			gate.setGateState(gate.getGateOpeningState());
+		}
 	}
 
 	@Override
