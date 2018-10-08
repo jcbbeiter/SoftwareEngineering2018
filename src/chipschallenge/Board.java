@@ -19,8 +19,6 @@ public class Board implements Observer {
 	// level instance variables
 	private int rows;
 	private int cols;
-	private int chipStartX;
-	private int chipStartY;
 	private String nextLevelName;
 	private GridObject[][] grid;
 	
@@ -53,7 +51,6 @@ public class Board implements Observer {
 		    
 		    for (int r = 0; r < rows; r++) {
 		    	String line = reader.readLine();
-
 		    	List<String> cells = Arrays.asList(line.split(","));
 		    	for (int c = 0; c < cols; c++) {
 		    		switch(cells.get(c).charAt(0)) {

@@ -64,7 +64,7 @@ public class ChipsChallenge extends Application {
 					break;
 				default:
 					break;
-			} \]
+			}
 			}
 		});
 	}
