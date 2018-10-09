@@ -7,5 +7,7 @@ public abstract class GridObject {
 	protected ImageView view;
 	
 	abstract boolean canEnter();
-	abstract ImageView getImageView();
+	abstract void onEnter(int r, int c);
+	
+	public ImageView getImageView() { return view; }
 }

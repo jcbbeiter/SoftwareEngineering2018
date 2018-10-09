@@ -16,8 +16,8 @@ public class Wall extends GridObject {
 	}
 
 	@Override
-	ImageView getImageView() {
-		return view;
+	void onEnter(int r, int c) {
+		return;
 	}
 
 }

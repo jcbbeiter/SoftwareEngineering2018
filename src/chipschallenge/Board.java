@@ -1,29 +1,38 @@
 package chipschallenge;
 
-import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 public class Board implements Observer {
 	
 	// level instance variables
 	private int rows;
 	private int cols;
+	private String currentLevelName;
+	private String levelTitle;
 	private String nextLevelName;
 	private GridObject[][] grid;
+	private int chipsLeft;
+	private Text chipsLeftText;
+	private HashSet<Character> keys;
 	
 	private int gridSize;
 	private int cellSize;
+	
+	private AnchorPane pane;
 	
 	private static Board instance = null;
 	protected Board() {}
@@ -35,8 +44,34 @@ public class Board implements Observer {
 		return instance;
 	}
 	
-	public void loadLevel(String levelName, AnchorPane pane) {
+	public void setPane(AnchorPane pane) {
+		this.pane = pane;
+	}
+	
+	public void resetLevel() {
+		loadLevel(currentLevelName);
+	}
+	
+	public void loadNextLevel() {
+		loadLevel(nextLevelName);
+	}
+	
+	public int getChipsLeft() {
+		return chipsLeft;
+	}
+	
+	public void collectKey(char color) {
+		keys.add(color);
+	}
+	
+	public boolean keyCollected(char color) {
+		return keys.contains(color);
+	}
+	
+	public void loadLevel(String levelName) {
+		ChipsChallenge.resetPane(pane);
 		File file = new File("bin\\chiplevels\\"+levelName);
+		currentLevelName = levelName;
 		BufferedReader reader = null;
 		
 		try {
@@ -45,9 +80,14 @@ public class Board implements Observer {
 		    List<String> headerArgs = Arrays.asList(header.split(","));
 		    rows = Integer.parseInt(headerArgs.get(0));
 		    cols = Integer.parseInt(headerArgs.get(1));
-		    nextLevelName = headerArgs.get(2);
+		    levelTitle = headerArgs.get(2);
+		    nextLevelName = headerArgs.get(3);
+		    keys = new HashSet<Character>();
+		    
+		    chipsLeftText = ChipsChallenge.writeText(pane,levelTitle);
 		    
 		    grid = new GridObject[rows][cols];
+		    chipsLeft = 0;
 		    
 		    for (int r = 0; r < rows; r++) {
 		    	String line = reader.readLine();
@@ -65,6 +105,25 @@ public class Board implements Observer {
 		    			Chip.getInstance().setRow(r);
 		    			Chip.getInstance().setCol(c);
 		    			break;
+		    		case 'c':
+		    			chipsLeft++;
+		    			grid[r][c] = new ChipItem(cellSize);
+		    			break;
+		    		case 'P':
+		    			grid[r][c] = new Pusher(cellSize,cells.get(c).charAt(1));
+		    			break;
+		    		case 'W':
+		    			grid[r][c] = new ChipWall(cellSize);
+		    			break;
+		    		case 'p':
+		    			grid[r][c] = new Portal(cellSize);
+		    			break;
+		    		case 'k':
+		    		case 'K':
+		    			grid[r][c] = new Key(cellSize,cells.get(c).charAt(1));
+		    			break;
+		    		case 'L':
+		    			grid[r][c] = new Lock(cellSize,cells.get(c).charAt(1));
 		    		default:
 		    		}
 		    		
@@ -78,6 +137,9 @@ public class Board implements Observer {
 		    		}
 		    	}
 		    }
+		    chipsLeftText.setText(String.format("Chips Left: %d",chipsLeft));
+			Chip.getInstance().reset();
+		    drawBoard();
 		    
 		} catch (FileNotFoundException e) {
 		    e.printStackTrace();
@@ -91,6 +153,18 @@ public class Board implements Observer {
 		    } catch (IOException e) {
 		    }
 		}
+	}
+	
+	public void removeObject(int r, int c) {
+		if (grid[r][c] instanceof ChipItem) {
+			chipsLeft--;
+			chipsLeftText.setText(String.format("Chips Left: %d",chipsLeft));
+			
+			if (chipsLeft == 0) {
+				chipsLeftText.setFill(Color.GREEN);
+			}
+		}
+		grid[r][c] = null;
 	}
 	
 	public void drawBoard() {
@@ -155,7 +229,20 @@ public class Board implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg1) {
+
+		// make sure it's a Chip moving update
 		if ((Object)o instanceof Chip) {
+
+			// get Chip's new location
+			int chipR = Chip.getInstance().getRow();
+			int chipC = Chip.getInstance().getCol();
+			
+			// if there's a GridObject there, call its onEnter function
+			if (grid[chipR][chipC] != null) {
+				grid[chipR][chipC].onEnter(chipR, chipC);
+			}
+			
+			// draw the new board
 			drawBoard();
 		}
 	}

@@ -1,6 +1,5 @@
 package chipschallenge;
 
-import java.awt.Point;
 import java.util.Observable;
 
 import javafx.scene.image.Image;
@@ -14,7 +13,6 @@ public class Chip extends Observable {
 	private Image faceRight;
 	private Image faceDown;
 	private ImageView view;
-	
 	
 	private int row;
 	private int col;
@@ -51,6 +49,8 @@ public class Chip extends Observable {
 			view.setImage(faceDown);
 			nextr = row+1;
 			break;
+		default:
+			break;
 		}
 		
 		if (Board.getInstance().canEnter(this,nextr,nextc)) {
@@ -58,6 +58,7 @@ public class Chip extends Observable {
 			col = nextc;
 			setChanged();
 			notifyObservers();
+			view.toFront();
 		}
 		
 	}
@@ -91,5 +92,9 @@ public class Chip extends Observable {
 	
 	public void setCol(int c) {
 		col = c;
+	}
+	
+	public void reset() {
+		view.setImage(faceDown);
 	}
 }
