@@ -68,6 +68,7 @@ public class Board implements Observer {
 		return keys.contains(color);
 	}
 	
+	// load level from file
 	public void loadLevel(String levelName) {
 		ChipsChallenge.resetPane(pane);
 		File file = new File("bin\\chiplevels\\"+levelName);
@@ -78,6 +79,7 @@ public class Board implements Observer {
 		    reader = new BufferedReader(new FileReader(file));
 		    String header = reader.readLine();
 		    List<String> headerArgs = Arrays.asList(header.split(","));
+		    // get arguments from header of file
 		    rows = Integer.parseInt(headerArgs.get(0));
 		    cols = Integer.parseInt(headerArgs.get(1));
 		    levelTitle = headerArgs.get(2);
@@ -89,6 +91,9 @@ public class Board implements Observer {
 		    grid = new GridObject[rows][cols];
 		    chipsLeft = 0;
 		    
+		    // read in line by line and split on commas
+		    // the chars represent what the cell contains
+		    // some objects have a second argument (e.g. key's color, pusher's direction)
 		    for (int r = 0; r < rows; r++) {
 		    	String line = reader.readLine();
 		    	List<String> cells = Arrays.asList(line.split(","));
@@ -130,6 +135,7 @@ public class Board implements Observer {
 		    	}
 		    }
 		    
+		    // add image views to pane
 		    for (int r = 0; r < rows; r++) {
 		    	for (int c = 0; c < rows; c++) {
 		    		if (grid[r][c] != null) {
@@ -155,6 +161,7 @@ public class Board implements Observer {
 		}
 	}
 	
+	// remove object from grid; if it's a chip, update count
 	public void removeObject(int r, int c) {
 		if (grid[r][c] instanceof ChipItem) {
 			chipsLeft--;
@@ -167,11 +174,13 @@ public class Board implements Observer {
 		grid[r][c] = null;
 	}
 	
+	// draw the 9x9 view of the board
 	public void drawBoard() {
 		int chipR = Chip.getInstance().getRow();
 		int chipC = Chip.getInstance().getCol();
 
 		
+		// calculate which row/column is the top left of the visible square
 		int buffer = gridSize/2;
 		int topLeftRow = chipR-buffer;
 		int topLeftCol = chipC-buffer;
@@ -188,20 +197,21 @@ public class Board implements Observer {
 			topLeftCol = 0;
 		}
 		
-		
-		
 		ImageView chipView = Chip.getInstance().getImageView();
 		chipView.setY(cellSize*(chipR-topLeftRow));
 		chipView.setX(cellSize*(chipC-topLeftCol));
 		
+		// update locations of image views
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
 				if (grid[r][c] == null) {
 					continue;
 				}
 				ImageView view = grid[r][c].getImageView();
+				// put in spot relative to top left view
 				view.setX(cellSize*(c-topLeftCol));
 				view.setY(cellSize*(r-topLeftRow));
+				// if it's out of bounds, set it far away so it's not seen
 				if (c < 0 || r < 0 || c-topLeftCol >= gridSize || r-topLeftRow >= gridSize) {
 					view.setX(-1000);
 					view.setY(-1000);
@@ -212,9 +222,9 @@ public class Board implements Observer {
 
 	}
 	
+	// answer if chip can enter a square (asks the GridObject)
 	public boolean canEnter(Object o, int r, int c) {
 		GridObject obj = grid[r][c];
-		
 		if (obj == null) {
 			return true;
 		} else {

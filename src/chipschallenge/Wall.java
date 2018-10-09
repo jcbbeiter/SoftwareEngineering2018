@@ -11,12 +11,12 @@ public class Wall extends GridObject {
 	}
 	@Override
 	boolean canEnter() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	void onEnter(int r, int c) {
+		// should never be called
 		return;
 	}
 

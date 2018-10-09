@@ -55,6 +55,8 @@ public class Key extends GridObject {
 
 		Board.getInstance().collectKey(color);
 		Board.getInstance().removeObject(r, c);
+		
+		// move key image into the sidebar (inventory)
 		view.setImage(smallImage);
 		view.setX(723 + keyIndex*50);
 		view.setY(575);

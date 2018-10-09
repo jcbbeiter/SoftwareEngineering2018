@@ -28,6 +28,8 @@ public class ChipsChallenge extends Application {
 	private final static int keyCellSize = 50;
 	private AnchorPane myPane;
 	
+	// clear pane and create constants (like sidebar)
+	// to be called before loading any level
 	public static void resetPane(AnchorPane pane) {
 		pane.getChildren().clear();
 		// create blank tile images
@@ -74,10 +76,6 @@ public class ChipsChallenge extends Application {
 		
 		// make chip visible
 		pane.getChildren().add(Chip.getInstance().getImageView());
-	}
-	
-	public static int getTextXPos(String text) {
-		return gridSize*cellSize+borderWidth + sidebarWidth/2 - text.length()*5;
 	}
 	
 	// text positions will be hard-coded just for ease of use
