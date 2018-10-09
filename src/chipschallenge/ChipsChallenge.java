@@ -113,7 +113,7 @@ public class ChipsChallenge extends Application {
 		Chip.setImageSize(cellSize);
 		
 		Board.getInstance().setPane(myPane);
-		Board.getInstance().loadLevel("Level3.txt");
+		Board.getInstance().loadLevel("Level1.txt");
 		Chip.getInstance().addObserver(Board.getInstance());
 		
 		primaryStage.setScene(scene);
