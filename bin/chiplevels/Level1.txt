@@ -1,26 +1,26 @@
-25,25,Level2.txt
-x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x,x,x,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x,o,o,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x,o,C,o,x
-x,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,x
-x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x
+25,25,Level 1 ,Level2.txt
+x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x
+x ,o ,o ,o ,o ,x ,p ,x ,KR,o ,o ,o ,o ,o ,Pr,Pr,Pr,o ,Pd,x ,o ,o ,o ,o ,x
+x ,o ,C ,o ,c ,x ,o ,x ,o ,o ,o ,o ,o ,o ,Pl,Kg,Pl,Pd,Pd,x ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,x ,W ,x ,o ,o ,o ,o ,o ,o ,Pr,Pd,o ,Pl,o ,x ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,Pl,Pl,Pu,Pd,Pl,x ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,c ,o ,Pr,Pu,Ky,Pl,Pu,x ,o ,o ,o ,o ,x
+x ,Pd,Pu,x ,LR,x ,Pd,x ,LG,x ,x ,Pu,x ,x ,x ,x ,x ,x ,x ,x ,o ,o ,o ,o ,x
+x ,Pd,Pu,x ,c ,x ,Pd,x ,c ,x ,x ,Pu,x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,Pd,Pu,x ,x ,x ,Pd,x ,x ,x ,x ,Pu,x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,Pd,Pu,x ,o ,x ,Pd,x ,x ,x ,x ,Pu,x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,Pd,Pu,x ,o ,x ,Pd,x ,x ,c ,Ly,o ,x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,c ,x ,o ,x ,Pd,x ,x ,x ,x ,Pu,x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,x ,x ,x ,o ,x ,Pd,x ,o ,o ,x ,Pu,x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,x ,Pd,x ,x ,x ,x ,Pu,x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,x ,o ,o ,c ,o ,o ,Pu,x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,x ,x ,x ,x ,x ,x ,x ,x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,x
+x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x ,x
