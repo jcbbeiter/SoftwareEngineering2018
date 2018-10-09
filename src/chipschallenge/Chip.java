@@ -21,10 +21,10 @@ public class Chip extends Observable {
 	private static int imageSize;
 	
 	protected Chip() {
-		faceUp = new Image("chiptextures\\chipUp.png",imageSize,imageSize,false,false);
-		faceLeft = new Image("chiptextures\\chipLeft.png",imageSize,imageSize,false,false);
-		faceRight = new Image("chiptextures\\chipRight.png",imageSize,imageSize,false,false);
-		faceDown = new Image("chiptextures\\chipDown.png",imageSize,imageSize,false,false);
+		faceUp = new Image("chiptextures\\ChipUp.png",imageSize,imageSize,false,false);
+		faceLeft = new Image("chiptextures\\ChipLeft.png",imageSize,imageSize,false,false);
+		faceRight = new Image("chiptextures\\ChipRight.png",imageSize,imageSize,false,false);
+		faceDown = new Image("chiptextures\\ChipDown.png",imageSize,imageSize,false,false);
 		
 		view = new ImageView(faceDown);
 	}
